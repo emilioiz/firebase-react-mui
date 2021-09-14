@@ -25,7 +25,8 @@ const theme = createTheme({
     },
     common: {
       black: '#171A21',
-      white: '#'
+      white: '#FFFFFF',
+      lightblue: '#92BCEA'
     },
     grey: {
       50: '#CDD6E0',
