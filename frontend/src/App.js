@@ -1,15 +1,11 @@
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
-import useTheme from '@mui/material/styles/useTheme'
 
 import './App.css'
 
-import { Admin, GenericNotFound, Home, Theme } from './Pages'
-import { NavBar } from './Components'
+import { Admin, GenericNotFound, Home, Theme } from './pages'
+import { NavBar } from './components'
 
 function App() {
-  const theme = useTheme()
-  console.log('MUI Theme:', theme)
-
   return (
     <Router>
       <NavBar />
