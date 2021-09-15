@@ -20,18 +20,32 @@ export const setSessionIds = () => {
   sessionStorage.setItem('originalLocation', location)
 }
 
-export const setDocument = async (collectionName, docRef, data) => {
+export const setDocument = async (collection, docRef, data) => {
   if (docRef) {
     await db
-      .collection(collectionName)
+      .collection(collection)
       .doc(docRef)
       .set({ ...data, created: serverTimestamp(), updated: serverTimestamp() })
       .catch((err) => console.error('setDocument', err.message))
   } else {
     await db
-      .collection(collectionName)
+      .collection(collection)
       .doc()
       .set({ ...data, created: serverTimestamp(), updated: serverTimestamp() })
       .catch((err) => console.error('setDocument', err.message))
   }
+}
+
+export const getAllDocuments = async (collection) => {
+  const docs = []
+  await db
+    .collection(collection)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        docs.push({ docId: doc.id, ...doc.data() })
+      })
+    })
+
+  return docs
 }
