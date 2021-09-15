@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import useClickEvent from '../lib/useClickEvent'
+import { useClickEvent } from '../lib/hooks'
 
 import Typography from '@mui/material/Typography'
 import useTheme from '@mui/material/styles/useTheme'

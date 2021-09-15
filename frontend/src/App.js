@@ -10,6 +10,7 @@ import { Admin, GenericNotFound, Home, Theme } from './pages'
 import { NavBar } from './components'
 
 import { setBrowserId, setSessionIds } from './lib/functions'
+import { Pageview } from './components'
 
 function App() {
   const theme = useTheme()
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <Router>
+      <Pageview />
       <NavBar />
       <Container sx={{ paddingTop: theme.spacing(2) }}>
         <Switch>

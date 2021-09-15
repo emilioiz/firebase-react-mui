@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 
 import { setDocument } from './functions'
 
-export default function useClickEvent(elRef, callback) {
+export function useClickEvent(elRef, callback) {
   const callbackRef = useRef()
   callbackRef.current = callback
 

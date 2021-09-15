@@ -1,3 +1,4 @@
 import NavBar from './NavBar'
+import Pageview from './Pageview'
 
-export { NavBar }
+export { NavBar, Pageview }
