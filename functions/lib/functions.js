@@ -11,7 +11,6 @@ exports.dropCollection = async (collectionName) => {
       })
     })
     .catch((err) => error('dropCollection', err.message))
-  return null
 }
 
 exports.setDocument = async (collectionName, docRef, data) => {
@@ -28,5 +27,4 @@ exports.setDocument = async (collectionName, docRef, data) => {
       .set(data)
       .catch((err) => error('setDocument', err.message))
   }
-  return null
 }

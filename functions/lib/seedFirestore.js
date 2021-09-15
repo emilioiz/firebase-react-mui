@@ -27,8 +27,8 @@ exports.seedFirestore = functions.https.onRequest(async (req, res) => {
   const googleGeoCodesKeys = Object.keys(googleGeoCodes)
   googleGeoCodesKeys.forEach(async (key) => {
     const data = {
-      createdAt: getTimestamp(),
-      updatedAt: getTimestamp(),
+      created: getTimestamp(),
+      updated: getTimestamp(),
       name: googleGeoCodes[key]
     }
     setDocument('googleGeoCodes', key, data)
@@ -55,8 +55,8 @@ exports.seedFirestore = functions.https.onRequest(async (req, res) => {
         faker.address.stateAbbr() +
         ' ' +
         faker.address.zipCodeByState(),
-      createdAt: getTimestamp(),
-      updatedAt: getTimestamp()
+      created: getTimestamp(),
+      updated: getTimestamp()
     }
 
     return userObj
@@ -67,5 +67,5 @@ exports.seedFirestore = functions.https.onRequest(async (req, res) => {
     setDocument('users', false, data)
   })
 
-  res.end()
+  res.json({ message: 'Seeding Firestore' }).end()
 })
