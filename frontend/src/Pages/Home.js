@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography'
 import useTheme from '@mui/material/styles/useTheme'
 import Button from '@mui/material/Button'
 
-import { getAllDocuments, postToJSON } from '../lib/functions'
+import { getAllDocuments, dropCollection, postToJSON } from '../lib/functions'
 import { Loading } from '../components'
 
 const dayjs = require('dayjs')
@@ -30,12 +30,23 @@ export default function Home() {
   const dataButtonRef = useRef()
   useClickEvent(dataButtonRef, onClickEvent)
 
+  const clearDataButtonRef = useRef()
+  useClickEvent(clearDataButtonRef, onClickEvent)
+
   const getData = () => {
     setLoading(true)
     setTimeout(async () => {
       const docs = await getAllDocuments('events')
       const data = docs.map((doc) => postToJSON(doc))
       setData(data)
+    }, 200)
+  }
+
+  const clearData = () => {
+    setLoading(true)
+    dropCollection('events')
+    setTimeout(() => {
+      getData()
     }, 200)
   }
 
@@ -56,13 +67,22 @@ export default function Home() {
         <Button
           variant='contained'
           disableElevation
-          id='get-data'
+          id='get-event-data'
           value={pathname}
           ref={dataButtonRef}
           onClick={getData}
-          sx={{ width: '10rem', height: '3rem' }}
         >
-          GetData
+          Get Data
+        </Button>
+        <Button
+          variant='contained'
+          disableElevation
+          id='clear-event-data'
+          value={pathname}
+          ref={clearDataButtonRef}
+          onClick={clearData}
+        >
+          Clear Event Data
         </Button>
         {loading ? <Loading size={30} justify='left' align='center' /> : null}
       </Stack>

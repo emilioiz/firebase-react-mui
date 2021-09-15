@@ -9,7 +9,7 @@ import './App.css'
 import { NavBar } from './components'
 
 import { setBrowserId, setSessionIds } from './lib/functions'
-import { Pageview, Routes, DevRoutes } from './utilities'
+import { Pageview, DevRoutes } from './utilities'
 
 function App() {
   const theme = useTheme()
@@ -24,7 +24,9 @@ function App() {
       <Pageview />
       <NavBar />
       <Container sx={{ paddingTop: theme.spacing(2) }}>
-        {window.location.hostname === 'localhost' ? <DevRoutes /> : <Routes />}
+        {/* Use when in production to hide develop routes during deployment */}
+        {/* {window.location.hostname === 'localhost' ? <DevRoutes /> : <Routes />} */}
+        <DevRoutes />
       </Container>
     </Router>
   )

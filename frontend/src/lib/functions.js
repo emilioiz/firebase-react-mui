@@ -46,15 +46,28 @@ export const getAllDocuments = async (collection) => {
         docs.push(doc)
       })
     })
+    .catch((err) => console.error('getAllDocuments', err.message))
 
   return docs
 }
 
-export function postToJSON(doc) {
+export const postToJSON = (doc) => {
   const data = { docId: doc.id, ...doc.data() }
   return {
     ...data,
     created: data.created.toMillis(),
     updated: data.updated.toMillis()
   }
+}
+
+export const dropCollection = async (collection) => {
+  await db
+    .collection(collection)
+    .get()
+    .then((response) => {
+      return response.forEach((doc) => {
+        doc.ref.delete()
+      })
+    })
+    .catch((err) => console.error('dropCollection', err.message))
 }

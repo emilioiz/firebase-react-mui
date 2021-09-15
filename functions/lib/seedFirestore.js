@@ -7,13 +7,13 @@ const googleGeoCodes = require('../data/googleGeoCodes.json')
 
 const { dropCollection, setDocument } = require('./functions')
 
-//get server local timestamp
+// get server local timestamp
 const getTimestamp = () => {
   const currentTimestamp = admin.firestore.Timestamp.fromDate(new Date())
   return currentTimestamp
 }
 
-//do something X times
+// do something X times
 const times = (x) => (f) => {
   if (x > 0) {
     f()
@@ -22,7 +22,7 @@ const times = (x) => (f) => {
 }
 
 exports.seedFirestore = functions.https.onCall(async (data, context) => {
-  //Use to seed firestore from a local json file
+  // Use to seed firestore from a local json file
   await dropCollection('googleGeoCodes')
 
   const googleGeoCodesKeys = Object.keys(googleGeoCodes)
@@ -35,7 +35,7 @@ exports.seedFirestore = functions.https.onCall(async (data, context) => {
     setDocument('googleGeoCodes', key, data)
   })
 
-  //Use to seed firestore using faker
+  // Use to seed firestore using faker
   await dropCollection('users')
 
   const createUser = () => {
