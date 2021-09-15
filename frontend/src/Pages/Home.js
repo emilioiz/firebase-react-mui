@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { useClickEvent } from '../lib/hooks'
 
 import Stack from '@mui/material/Stack'
+import Grid from '@mui/material/Grid'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -13,6 +14,9 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import useTheme from '@mui/material/styles/useTheme'
 import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 import { getAllDocuments, dropCollection, postToJSON } from '../lib/functions'
 import { Loading } from '../components'
@@ -63,29 +67,48 @@ export default function Home() {
       >
         Home
       </Typography>
-      <Stack direction='row' spacing={2}>
-        <Button
-          variant='contained'
-          disableElevation
-          id='get-event-data'
-          value={pathname}
-          ref={dataButtonRef}
-          onClick={getData}
-        >
-          Get Data
-        </Button>
-        <Button
-          variant='contained'
-          disableElevation
-          id='clear-event-data'
-          value={pathname}
-          ref={clearDataButtonRef}
-          onClick={clearData}
-        >
-          Clear Event Data
-        </Button>
-        {loading ? <Loading size={30} justify='left' align='center' /> : null}
-      </Stack>
+      <Grid container justifyContent='space-between'>
+        <Grid item>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Button
+                variant='contained'
+                disableElevation
+                id='get-event-data'
+                value={pathname}
+                ref={dataButtonRef}
+                onClick={getData}
+              >
+                Get Data
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                variant='contained'
+                disableElevation
+                id='clear-event-data'
+                value={pathname}
+                ref={clearDataButtonRef}
+                onClick={clearData}
+              >
+                Clear Event Data
+              </Button>
+            </Grid>
+            <Grid item>
+              {loading ? (
+                <Loading size={30} justify='left' align='center' />
+              ) : null}
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <IconButton color='secondary' aria-label='github link'>
+            <a href='https://github.com/emilioiz/firebase-react-mui'>
+              <GitHubIcon style={{ height: '2rem', width: '2rem' }} />
+            </a>
+          </IconButton>
+        </Grid>
+      </Grid>
 
       {data && (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
