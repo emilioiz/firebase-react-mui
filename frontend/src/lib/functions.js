@@ -43,9 +43,18 @@ export const getAllDocuments = async (collection) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        docs.push({ docId: doc.id, ...doc.data() })
+        docs.push(doc)
       })
     })
 
   return docs
+}
+
+export function postToJSON(doc) {
+  const data = { docId: doc.id, ...doc.data() }
+  return {
+    ...data,
+    created: data.created.toMillis(),
+    updated: data.updated.toMillis()
+  }
 }

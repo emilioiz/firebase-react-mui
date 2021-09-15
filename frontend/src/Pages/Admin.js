@@ -13,9 +13,13 @@ export default function Admin() {
   const theme = useTheme()
   const { pathname } = useLocation()
 
-  const adminButtonRef = useRef()
   const onClickEvent = () => {}
-  useClickEvent(adminButtonRef, onClickEvent)
+
+  const testButtonRef = useRef()
+  useClickEvent(testButtonRef, onClickEvent)
+
+  const seedButtonRef = useRef()
+  useClickEvent(seedButtonRef, onClickEvent)
 
   const handleSeedClick = async () => {
     const seedFirestore = func.httpsCallable('seedFirestore')
@@ -42,7 +46,7 @@ export default function Admin() {
               disableElevation
               id='test-click'
               value={pathname}
-              ref={adminButtonRef}
+              ref={testButtonRef}
             >
               Test Click Event
             </Button>
@@ -53,7 +57,7 @@ export default function Admin() {
               disableElevation
               id='seed-firestore'
               value={pathname}
-              ref={adminButtonRef}
+              ref={seedButtonRef}
               onClick={handleSeedClick}
             >
               Seed Firestore
