@@ -1,4 +1,5 @@
 const { admin, functions } = require('./firebase')
+const { info } = require('firebase-functions/lib/logger')
 const faker = require('faker')
 faker.locale = 'en_US'
 
@@ -20,7 +21,7 @@ const times = (x) => (f) => {
   }
 }
 
-exports.seedFirestore = functions.https.onRequest(async (req, res) => {
+exports.seedFirestore = functions.https.onCall(async (data, context) => {
   //Use to seed firestore from a local json file
   await dropCollection('googleGeoCodes')
 
@@ -67,5 +68,6 @@ exports.seedFirestore = functions.https.onRequest(async (req, res) => {
     setDocument('users', false, data)
   })
 
-  res.json({ message: 'Seeding Firestore' }).end()
+  return info('seedFirestore', { message: 'seed firestore initiated' })
+  // res.json({ message: 'Seeding Firestore' }).end()
 })

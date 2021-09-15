@@ -1,7 +1,9 @@
 import { useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useClickEvent } from '../lib/hooks'
+import { func } from '../lib/firebase'
 
+import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import useTheme from '@mui/material/styles/useTheme'
 
@@ -15,25 +17,50 @@ export default function Admin() {
   const onClickEvent = () => {}
   useClickEvent(adminButtonRef, onClickEvent)
 
-  return (
-    <div>
-      <Typography
-        variant='h6'
-        component='div'
-        sx={{ padding: theme.spacing(2), paddingLeft: 0, paddingTop: 0 }}
-      >
-        Admin Page
-      </Typography>
+  const handleSeedClick = async () => {
+    const seedFirestore = func.httpsCallable('seedFirestore')
 
-      <Button
-        variant='contained'
-        disableElevation
-        id='test-click'
-        value={pathname}
-        ref={adminButtonRef}
-      >
-        Test Click Event
-      </Button>
-    </div>
+    await seedFirestore()
+  }
+
+  return (
+    <Grid container direction='column' spacing={2}>
+      <Grid item>
+        <Typography
+          variant='h6'
+          component='div'
+          sx={{ padding: theme.spacing(2), paddingLeft: 0, paddingTop: 0 }}
+        >
+          Admin Page
+        </Typography>
+      </Grid>
+      <Grid item>
+        <Grid container spacing={3}>
+          <Grid item>
+            <Button
+              variant='contained'
+              disableElevation
+              id='test-click'
+              value={pathname}
+              ref={adminButtonRef}
+            >
+              Test Click Event
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant='contained'
+              disableElevation
+              id='seed-firestore'
+              value={pathname}
+              ref={adminButtonRef}
+              onClick={handleSeedClick}
+            >
+              Seed Firestore
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }
